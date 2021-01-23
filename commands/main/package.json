@@ -1,6 +1,6 @@
 {
   "name": "@imooc-lego/cli-commands",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "命令集入口",
   "author": "qyingkou <qyingkou@163.com>",
   "homepage": "",

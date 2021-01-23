@@ -1,6 +1,6 @@
 {
   "name": "@imooc-lego/cli-core",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "cli框架入口",
   "author": "qyingkou <qyingkou@163.com>",
   "homepage": "",
@@ -27,9 +27,9 @@
     "start": "node bin/index.js"
   },
   "dependencies": {
-    "@imooc-lego/cli-commands": "^0.0.2",
-    "@imooc-lego/cli-models": "^0.0.2",
-    "@imooc-lego/cli-utils": "^0.0.2",
+    "@imooc-lego/cli-commands": "^0.0.3",
+    "@imooc-lego/cli-models": "^0.0.3",
+    "@imooc-lego/cli-utils": "^0.0.3",
     "axios": "^0.21.1"
   }
 }
