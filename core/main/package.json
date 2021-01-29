@@ -24,12 +24,13 @@
     "url": "git@github.com_qyingkou:imooclego/lego-cli.git"
   },
   "scripts": {
-    "start": "node bin/index.js"
+    "start": "bin/index.js"
   },
   "dependencies": {
     "@imooc-lego/cli-commands": "^0.0.3",
     "@imooc-lego/cli-models": "^0.0.3",
     "@imooc-lego/cli-utils": "^0.0.3",
-    "axios": "^0.21.1"
+    "import-local": "^3.0.2",
+    "npmlog": "^4.1.2"
   }
 }

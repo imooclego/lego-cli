@@ -1,10 +1,14 @@
 #!/usr/bin/env node
 
-const commands = require("@imooc-lego/cli-commands");
-const models = require("@imooc-lego/cli-models");
-const utils = require("@imooc-lego/cli-utils");
+const importLocal = require("import-local");
+const log = require("npmlog");
 
-console.log("=== entered core!===");
-console.log(commands());
-console.log(models());
-console.log(utils());
+// if (importLocal(__filename)) {
+//   log.info("cli", "if");
+// } else {
+//   log.info('cli', 'else');
+//   console.log(require("../lib")(process.argv.slice(2)));
+// }
+
+require("npmlog").info("cli", "运行npmlog");
+console.log("npmlog.info为什么就打印不出来呢?");
