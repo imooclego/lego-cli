@@ -1,14 +1,11 @@
 {
-  "name": "@imooc-lego/cli-core",
+  "name": "@imooc-lego/cli-utils-log",
   "version": "0.0.3",
-  "description": "cli框架入口",
+  "description": "日志类",
   "author": "qyingkou <qyingkou@163.com>",
   "homepage": "",
   "license": "ISC",
-  "bin": {
-    "lego": "bin/index.js"
-  },
-  "main": "lib/main.js",
+  "main": "lib/index.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -17,20 +14,16 @@
     "lib"
   ],
   "publishConfig": {
-    "access": "public"
+    "registry": "https://registry.npm.taobao.org/"
   },
   "repository": {
     "type": "git",
     "url": "git@github.com_qyingkou:imooclego/lego-cli.git"
   },
   "scripts": {
-    "start": "bin/index.js"
+    "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "@imooc-lego/cli-utils-log": "^0.0.3",
-    "colors": "^1.4.0",
-    "import-local": "^3.0.2",
-    "npmlog": "^4.1.2",
-    "semver": "^7.3.4"
+    "npmlog": "^4.1.2"
   }
 }
