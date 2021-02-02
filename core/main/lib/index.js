@@ -2,7 +2,10 @@
 
 module.exports = main;
 const semver = require("semver");
-const colors = require("colors");
+const colors = require("colors/safe");
+const userHome = require("user-home");
+const pathExists = require("path-exists").sync;
+
 const log = require("@imooc-lego/cli-utils-log");
 const pkg = require("../package.json");
 const { LOWEST_NODE_VERSION } = require("./const");
@@ -13,9 +16,20 @@ function main(argv) {
     log.notice("CLI_VERSION", "v%s", chk_pkg_ver());
     log.notice("NODE_VERSION", "v%s", chk_node_ver());
     log.notice("UID", "%s", chk_root());
+    log.notice("userhome", "%s", chk_user_home());
   } catch (e) {
     log.error(e.message);
   }
+}
+
+/* 检查用户主目录
+ * 若用户主目录不存在则抛错给外层
+ */
+function chk_user_home() {
+  if (!userHome || !pathExists(userHome)) {
+    throw new Error("当前登录用户的主目录不存在");
+  }
+  return userHome;
 }
 /* 检查包版本 */
 function chk_pkg_ver() {
