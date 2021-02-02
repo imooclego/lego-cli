@@ -13,13 +13,28 @@ const { version, geteuid } = process;
 
 function main(argv) {
   try {
+    log.notice("inputargs", "%s", chk_ipt_args());
     log.notice("CLI_VERSION", "v%s", chk_pkg_ver());
     log.notice("NODE_VERSION", "v%s", chk_node_ver());
     log.notice("UID", "%s", chk_root());
     log.notice("userhome", "%s", chk_user_home());
+    log.verbose("debug", "test");
   } catch (e) {
     log.error(e.message);
   }
+}
+
+/* 检查入参
+ * 若存在debug参数，则修改process.env.LOG_LEVEL标记为verbose
+ */
+function chk_ipt_args() {
+  const minimist = require("minimist");
+  const args = minimist(process.argv.slice(2));
+  if (args.debug) {
+    process.env.LOG_LEVEL = "verbose";
+  }
+  log.level = process.env.LOG_LEVEL;
+  return args;
 }
 
 /* 检查用户主目录

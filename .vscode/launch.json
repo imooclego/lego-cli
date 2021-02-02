@@ -10,7 +10,7 @@
       "name": "Launch Program",
       "skipFiles": ["<node_internals>/**"],
       "program": "${workspaceFolder}/core/main/bin/index.js",
-      "args": []
+      "args": ["--debug", "123"]
     }
   ]
 }
