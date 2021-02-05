@@ -1,7 +1,7 @@
 {
-  "name": "@imooc-lego/cli-utils-log",
+  "name": "@imooc-lego/cli-utils-get-npm-info",
   "version": "0.0.3",
-  "description": "日志类",
+  "description": "> TODO: description",
   "author": "qyingkou <qyingkou@163.com>",
   "homepage": "",
   "license": "ISC",
@@ -24,6 +24,8 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "npmlog": "^4.1.2"
+    "axios": "^0.21.1",
+    "semver": "^7.3.4",
+    "url-join": "^4.0.1"
   }
 }
