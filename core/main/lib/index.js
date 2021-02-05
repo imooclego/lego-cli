@@ -1,27 +1,63 @@
 "use strict";
 
 module.exports = main;
+/* packages */
+const path = require("path");
+const dotenv = require("dotenv");
 const semver = require("semver");
 const colors = require("colors/safe");
 const userHome = require("user-home");
 const pathExists = require("path-exists").sync;
-
 const log = require("@imooc-lego/cli-utils-log");
+/* others */
 const pkg = require("../package.json");
-const { LOWEST_NODE_VERSION } = require("./const");
+const { LOWEST_NODE_VERSION, DEF_CLI_HOME } = require("./const");
+const { env } = require("process");
 const { version, geteuid } = process;
 
 function main(argv) {
   try {
-    log.notice("inputargs", "%s", chk_ipt_args());
-    log.notice("CLI_VERSION", "v%s", chk_pkg_ver());
-    log.notice("NODE_VERSION", "v%s", chk_node_ver());
-    log.notice("UID", "%s", chk_root());
-    log.notice("userhome", "%s", chk_user_home());
+    log.notice("输入的参数", "%s", chk_ipt_args());
     log.verbose("debug", "test");
+    log.notice("cli版本号", "v%s", chk_pkg_ver());
+    log.notice("node版本号检查", "v%s", chk_node_ver());
+    log.notice("UID", "%s", chk_root());
+    log.notice("用户主目录", "%s", chk_user_home());
+    log.notice("环境变量检查", "%s", chk_env());
   } catch (e) {
     log.error(e.message);
   }
+}
+
+/* 检查环境
+ * 从用户主目录下加载.env文件（环境配置文件）
+ * 从常量中查询kv（与.env下的kv相同）
+ * 若环境配置中存在该key,返回value
+ * 若环境配置中不存在该key,返回默认v
+ *  - process.env中写入kv
+ */
+function chk_env() {
+  const envPath = path.resolve(userHome, ".env");
+  /* 加载全局的环境变量配置文件（～/.env）
+   * dotenv会给全局环境变量赋值：process.env[key] = value
+   */
+  if (pathExists(envPath)) {
+    dotenv.config({ path: envPath }).parsed;
+  }
+  /* 确保有值
+   * 若没有指定的kv,则使用默认值
+   */
+  return create_def_cfg();
+}
+function create_def_cfg() {
+  const env = process.env;
+  env["USER_HOME"] = userHome;
+  env["LEGO_CLI_HOME"] = env["LEGO_CLI_HOME"] ?? DEF_CLI_HOME;
+
+  return {
+    USER_HOME: env["USER_HOME"],
+    LEGO_CLI_HOME: env["LEGO_CLI_HOME"],
+  };
 }
 
 /* 检查入参
@@ -31,9 +67,8 @@ function chk_ipt_args() {
   const minimist = require("minimist");
   const args = minimist(process.argv.slice(2));
   if (args.debug) {
-    process.env.LOG_LEVEL = "verbose";
+    log.level = process.env.LOG_LEVEL = "verbose";
   }
-  log.level = process.env.LOG_LEVEL;
   return args;
 }
 
