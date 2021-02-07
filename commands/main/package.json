@@ -22,5 +22,8 @@
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "dependencies": {
+    "commander": "^7.0.0"
   }
 }
