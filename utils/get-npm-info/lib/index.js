@@ -1,6 +1,11 @@
 "use strict";
 
-module.exports = { getNpmInfo };
+module.exports = {
+  getNpmInfo,
+  getDefaultRegistry,
+  getNpmVersions,
+  getNpmLatestVersion,
+};
 /* pkg */
 const axios = require("axios");
 const semver = require("semver");
@@ -9,18 +14,14 @@ const urlJoin = require("url-join");
 const { REGISTRY } = require("./const");
 
 async function getNpmInfo(args) {
-  const {
-    name = null,
-    isOrigin = false,
-    registry = isOrigin ? REGISTRY.NPM : REGISTRY.TAOBAO,
-  } = args;
+  const { name = null, registry = getDefaultRegistry() } = args;
   if (!name) return null;
   const url = urlJoin(registry, name);
 
   return axios
     .get(url)
     .then((response) => {
-      if ((response.status === 200)) {
+      if (response.status === 200) {
         return response.data;
       }
       return null;
@@ -28,4 +29,25 @@ async function getNpmInfo(args) {
     .catch((e) => {
       return Promise.reject(err);
     });
+}
+async function getNpmVersions(name, registry) {
+  const data = await getNpmInfo({ name, registry });
+  if (data) {
+    return Object.keys(data.versions);
+  } else {
+    return [];
+  }
+}
+async function getNpmLatestVersion(npmName, registry) {
+  let versions = await getNpmVersions(npmName, registry);
+  if (versions) {
+    return versions.sort((next, cur) => {
+      return semver.lt(next, cur) ? 1 : -1;
+    })[0];
+  }
+  return null;
+}
+
+function getDefaultRegistry(isOrigin) {
+  return isOrigin ? REGISTRY.NPM : REGISTRY.TAOBAO;
 }

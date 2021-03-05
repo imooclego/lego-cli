@@ -1,0 +1,26 @@
+{
+  "name": "@imooc-lego/cli-utils-format-path",
+  "version": "0.0.3",
+  "description": "> TODO: description",
+  "author": "qyingkou <qyingkou@163.com>",
+  "homepage": "",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com_qyingkou:imooclego/lego-cli.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  }
+}

@@ -10,7 +10,12 @@
       "name": "Launch Program",
       "skipFiles": ["<node_internals>/**"],
       "program": "${workspaceFolder}/core/main/bin/index.js",
-      "args": ["test", "aaa", "bbb", "-x", "xx", "-y", "yy"]
+      "args": [
+        "init",
+        "projectName1",
+        "--targetPath",
+        "/Users/ck/.lego/dependencies/node_modules/_axios@0.21.0@axios"
+      ]
     }
   ]
 }

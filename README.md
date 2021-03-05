@@ -29,3 +29,11 @@ npm-package-name 遵循的格式：`<npm-org-name>/<package-type >-<package-name
 - utils
   - main @imooc-lego/cli-utils
   - log @imooc-lego/cli-utils-log
+
+## 全局变量
+
+process.env.LEGO_CLI
+  userHome
+  cacheHome
+  globalOptions.target
+  
