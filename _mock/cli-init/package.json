@@ -1,0 +1,33 @@
+{
+  "_id": "@imooc-lego/cli-init",
+  "_rev": "2-5aabcd70f9c5c7684735f1beb312902d",
+  "name": "@imooc-lego/cli-init",
+  "dist-tags": {
+    "latest": "0.0.0"
+  },
+  "versions": {
+    "0.0.0": {}
+  },
+  "time": {
+    "created": "2021-01-23T02:46:53.588Z",
+    "0.0.0": "2021-01-23T02:46:53.955Z"
+  },
+  "maintainers": [
+    {
+      "name": "qyingkou",
+      "email": "qyingkou@163.com"
+    }
+  ],
+  "description": "mock",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com_qyingkou:imooclego/lego-cli.git"
+  },
+  "author": {
+    "name": "qyingkou",
+    "email": "qyingkou@163.com"
+  },
+  "license": "ISC",
+  "readme": "# `main`\n\n> TODO: description\n\n## Usage\n\n```\nconst main = require('main');\n\n// TODO: DEMONSTRATE API\n```\n",
+  "readmeFilename": "README.md"
+}
