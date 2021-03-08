@@ -27,6 +27,7 @@
     "start": "bin/index.js"
   },
   "dependencies": {
+    "@imooc-lego/cli-config": "^0.0.3",
     "@imooc-lego/cli-core-exec": "^0.0.0",
     "@imooc-lego/cli-init": "^0.0.0",
     "@imooc-lego/cli-utils-get-npm-info": "^0.0.3",

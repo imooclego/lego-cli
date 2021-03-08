@@ -1,5 +1,5 @@
 {
-  "name": "@imooc-lego/cli-utils-get-npm-info",
+  "name": "@imooc-lego/cli-config",
   "version": "0.0.3",
   "description": "> TODO: description",
   "author": "qyingkou <qyingkou@163.com>",
@@ -24,9 +24,6 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "@imooc-lego/cli-config": "^0.0.3",
-    "axios": "^0.21.1",
-    "semver": "^7.3.4",
-    "url-join": "^4.0.1"
+    "axios": "^0.21.1"
   }
 }

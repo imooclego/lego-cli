@@ -24,6 +24,7 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
+    "@imooc-lego/cli-init": "^0.0.0",
     "@imooc-lego/cli-models-package": "^0.0.0"
   }
 }

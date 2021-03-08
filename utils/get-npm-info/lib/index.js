@@ -7,7 +7,7 @@ module.exports = {
   getNpmLatestVersion,
 };
 /* pkg */
-const axios = require("axios");
+const axios = require("@imooc-lego/cli-config/axios");
 const semver = require("semver");
 const urlJoin = require("url-join");
 /* other */
@@ -27,7 +27,7 @@ async function getNpmInfo(args) {
       return null;
     })
     .catch((e) => {
-      return Promise.reject(err);
+      return Promise.reject(e);
     });
 }
 async function getNpmVersions(name, registry) {

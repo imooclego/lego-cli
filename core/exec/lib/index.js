@@ -4,8 +4,7 @@ module.exports = exec;
 const path = require("path");
 const Package = require("@imooc-lego/cli-models-package");
 const SETTING = {
-  // init: "@imooc-lego/cli-init",
-  init: "axios",
+  init: "@imooc-lego/cli-init",
 };
 const CACHE_DIR = "dependencies";
 
@@ -52,6 +51,6 @@ async function exec() {
   const rootFile = pkg.getRootFilePath();
   if (rootFile) {
     // 在当前进程中调用（无法充分利用cpu资源）
-    require(rootFile).apply(null, arguments);
+    require(rootFile).apply(null, Array.from(arguments));
   }
 }
