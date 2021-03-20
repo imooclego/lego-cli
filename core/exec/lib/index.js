@@ -1,8 +1,16 @@
+/* （commander框架的）command-action回调逻辑
+ * 实例化Package类
+ * 安装/更新命令对应的npm包
+ * 运行该npm包
+ */
+
 "use strict";
 
 module.exports = exec;
 const path = require("path");
 const Package = require("@imooc-lego/cli-models-package");
+const { commanderActionArgsParse } = require("@imooc-lego/cli-utils");
+
 const SETTING = {
   init: "@imooc-lego/cli-init",
 };
@@ -10,21 +18,15 @@ const CACHE_DIR = "dependencies";
 
 async function exec() {
   let pkg;
-  const commandParams = Array.prototype.slice.call(
-    arguments,
-    0,
-    arguments.length - 2
-  );
-  const [commandOptions, commandObject] = Array.prototype.slice.call(
-    arguments,
-    arguments.length - 2
-  );
+  const { commandObject } = commanderActionArgsParse(arguments);
   const packageName = SETTING[commandObject.name()];
   let targetPath = process.env.LEGO_CLI_TARGET;
   let storeDir = "";
   let homePath = process.env.LEGO_CLI_HOME;
 
-  // 走缓存目录模式（传入option:targetPath），还是不走缓存模式
+  /* 实例化Package类
+   * 走缓存目录模式（传入option:targetPath）下，还需要自动更新或安装包
+   */
   if (!targetPath) {
     targetPath = path.resolve(homePath, CACHE_DIR);
     storeDir = path.resolve(targetPath, "node_modules");
@@ -47,10 +49,15 @@ async function exec() {
     });
   }
 
-  /* 获取入口文件，并且调用 */
+  // 获取包的入口文件
   const rootFile = pkg.getRootFilePath();
+  // 执行
   if (rootFile) {
     // 在当前进程中调用（无法充分利用cpu资源）
-    require(rootFile).apply(null, Array.from(arguments));
+    try {
+      require(rootFile).apply(null, Array.from(arguments));
+    } catch (e) {
+      console.log(e);
+    }
   }
 }

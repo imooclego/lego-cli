@@ -33,7 +33,10 @@ npm-package-name 遵循的格式：`<npm-org-name>/<package-type >-<package-name
 ## 全局变量
 
 process.env.LEGO_CLI
-  userHome
-  cacheHome
+  // 配置环境
+  mode // 开发环境
+  userHome // 用户目录
+  cacheHome // 缓存目录
+  // 全局属性kv
   globalOptions.target
   

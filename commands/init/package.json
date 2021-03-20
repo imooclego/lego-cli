@@ -22,5 +22,9 @@
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "dependencies": {
+    "@imooc-lego/cli-models-command": "^0.0.3",
+    "@imooc-lego/cli-utils-log": "^0.0.3"
   }
 }

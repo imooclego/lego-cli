@@ -1,7 +1,21 @@
+/* init命令 */
+
 "use strict";
 
-module.exports = init;
+const Command = require("@imooc-lego/cli-models-command");
+const log = require("@imooc-lego/cli-utils-log");
 
-function init(projectName, cmdOpts) {
-  console.log({ projectName, cmdOpts, target: process.env["LEGO_CLI_TARGET"] });
+class InitCommand extends Command {
+  init() {
+    this.projectName = this._argv[0] || "";
+    this.force = !!this._options.force;
+    // log.verbose("projectName", this.projectName);
+    // log.verbose("force", this.force);
+  }
+  exec() {}
 }
+function init(projectName, commandOptions, commandObjet) {
+  return new InitCommand([projectName, commandOptions, commandObjet]);
+}
+init.InitCommand = InitCommand;
+module.exports = init;

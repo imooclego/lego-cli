@@ -13,8 +13,8 @@
       "args": [
         "init",
         "projectName1",
-        "--targetPath",
-        "/Users/ck/.lego/dependencies/node_modules/_axios@0.21.0@axios"
+        "--debug",
+        "--force",
       ]
     }
   ]
