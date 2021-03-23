@@ -8,9 +8,6 @@ class Command {
     if (!argv) {
       throw new Error("参数不能为空！");
     }
-    if (types(argv) !== "array") {
-      throw new Error("参数必须为数组！");
-    }
     this._argv = argv;
     let runner = new Promise((resolve, reject) => {
       let chain = Promise.resolve();
@@ -24,14 +21,10 @@ class Command {
   }
   /*  */
   initArgs(args) {
-    const {
-      commandParams,
-      commandOptions,
-      commandObject,
-    } = commanderActionArgsParse(args);
+    const { commandParams, commandOptions } = args;
     this._params = commandParams;
     this._options = commandOptions;
-    this._cmd = commandObject;
+    // this._cmd = commandObject;
   }
   init() {
     throw new Error("init方法未定义");

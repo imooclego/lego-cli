@@ -7,15 +7,15 @@ const log = require("@imooc-lego/cli-utils-log");
 
 class InitCommand extends Command {
   init() {
-    this.projectName = this._argv[0] || "";
+    this.projectName = this._params[0] || "";
     this.force = !!this._options.force;
-    // log.verbose("projectName", this.projectName);
-    // log.verbose("force", this.force);
+    log.verbose("projectName", this.projectName);
+    log.verbose("force", this.force);
   }
   exec() {}
 }
-function init(projectName, commandOptions, commandObjet) {
-  return new InitCommand([projectName, commandOptions, commandObjet]);
+function init(args) {
+  return new InitCommand(args);
 }
 init.InitCommand = InitCommand;
 module.exports = init;

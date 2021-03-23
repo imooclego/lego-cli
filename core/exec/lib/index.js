@@ -9,7 +9,9 @@
 module.exports = exec;
 const path = require("path");
 const Package = require("@imooc-lego/cli-models-package");
-const { commanderActionArgsParse } = require("@imooc-lego/cli-utils");
+const { commanderActionArgsParse, deepcopy } = require("@imooc-lego/cli-utils");
+const cp = require("child_process");
+const log = require("@imooc-lego/cli-utils-log");
 
 const SETTING = {
   init: "@imooc-lego/cli-init",
@@ -18,7 +20,11 @@ const CACHE_DIR = "dependencies";
 
 async function exec() {
   let pkg;
-  const { commandObject } = commanderActionArgsParse(arguments);
+  const {
+    commandParams,
+    commandOptions,
+    commandObject,
+  } = commanderActionArgsParse(arguments);
   const packageName = SETTING[commandObject.name()];
   let targetPath = process.env.LEGO_CLI_TARGET;
   let storeDir = "";
@@ -53,11 +59,23 @@ async function exec() {
   const rootFile = pkg.getRootFilePath();
   // 执行
   if (rootFile) {
-    // 在当前进程中调用（无法充分利用cpu资源）
+    // 子进程中调用包
     try {
-      require(rootFile).apply(null, Array.from(arguments));
+      const args = { commandParams, commandOptions };
+      const code = `require("${rootFile}").call(null, ${JSON.stringify(args)})`;
+      const child = cp.spawn("node", ["-e", code], {
+        cwd: process.cwd(),
+        stdio: "inherit",
+      });
+      child.on("error", (e) => {
+        log.error(e.message);
+        process.exit(1);
+      });
+      child.on("exit", (e) => {
+        log.verbose("命令执行成功", e);
+      });
     } catch (e) {
-      console.log(e);
+      log.error(e);
     }
   }
 }

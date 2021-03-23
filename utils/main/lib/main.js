@@ -1,6 +1,6 @@
 "use strict";
 
-module.exports = { commanderActionArgsParse, types };
+module.exports = { commanderActionArgsParse, types, deepcopy };
 /* 判断数据类型 */
 function types(v) {
   const typeStr = Object.prototype.toString.call(v);
@@ -18,4 +18,8 @@ function commanderActionArgsParse(args) {
     args.length - 2
   );
   return { commandParams, commandOptions, commandObject };
+}
+
+function deepcopy(obj) {
+  return JSON.parse(JSON.stringify(obj));
 }
