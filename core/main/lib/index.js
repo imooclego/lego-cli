@@ -4,10 +4,7 @@ module.exports = main;
 // build-in
 const path = require("path");
 // node_modules
-const colors = require("colors/safe");
 const Commander = require("commander");
-const figlet = require("figlet");
-const boxen = require("boxen");
 
 const log = require("@imooc-lego/cli-utils-log");
 const exec = require("@imooc-lego/cli-core-exec");
@@ -37,33 +34,6 @@ async function main(argv) {
  */
 async function prepare() {
   await chk_global_pkg(); // 全局包版本检查。本地包就不需要提示更新吗？
-}
-
-/* logo图案
- * - figlet用于文字转图案
- * - colors用于着色
- * - boxen用于排版
- */
-function renderLogo(logo, version) {
-  const logoText = figlet.textSync(logo, {
-    horizontalLayout: "full",
-    verticalLayout: "full",
-  });
-  const colorText = [colors.green(logoText), colors.green(`v${version}`)].join(
-    "\n"
-  );
-  const boxed = boxen(colorText, {
-    align: "right",
-    borderStyle: {
-      topLeft: " ",
-      topRight: " ",
-      bottomLeft: " ",
-      bottomRight: " ",
-      horizontal: " ",
-      vertical: " ",
-    },
-  });
-  return boxed;
 }
 
 /* 注册命令 */
@@ -98,11 +68,6 @@ function registerCommand() {
   });
   program.on("option:targetPath", (value) => {
     process.env["LEGO_CLI_TARGET"] = value;
-  });
-  // 若不进行全局注册（使用默认的）则监听不到的
-  program.on("option:help", () => {
-    if (program.rawArgs.length === 3)
-      console.log(renderLogo("LEGO", pkg.version));
   });
   // 监听所有命令
   program.on("command:*", (commands) => {
